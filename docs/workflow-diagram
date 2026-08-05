@@ -1,0 +1,33 @@
+# JML Process Flow
+
+```mermaid
+flowchart TD
+    HR[HR/Manager Request] -->|New hire| J1[Joiner.ps1]
+    HR -->|Role or dept change| M1[Mover.ps1]
+    HR -->|Termination| L1[Leaver.ps1]
+
+    J1 --> J2[Create Entra user]
+    J2 --> J3[Assign license]
+    J3 --> J4[Add role-based groups]
+    J4 --> J5[Set manager]
+    J5 --> AUDIT[(jml-audit-log.csv)]
+
+    M1 --> M2[Update job title / dept]
+    M2 --> M3[Remove old-role groups]
+    M3 --> M4[Add new-role groups]
+    M4 --> M5[Update manager]
+    M5 --> AUDIT
+
+    L1 --> L2[Disable sign-in]
+    L2 --> L3[Revoke active sessions]
+    L3 --> L4[Remove licenses]
+    L4 --> L5[Remove from all groups]
+    L5 --> L6[Add to Leavers-Audit group]
+    L6 --> L7[Stamp termination date]
+    L7 --> AUDIT
+    L7 -.->|After retention window| DEL[Manual hard-delete]
+```
+
+**Design note on Leaver ordering:** disable + revoke sessions happen before any
+license or group cleanup. If the script fails partway through, the account is
+already locked out — the remaining steps are hygiene, not security-critical.
