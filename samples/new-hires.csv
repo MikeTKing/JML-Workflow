@@ -1,1 +1,2 @@
-12
+DisplayName,UserPrincipalName,MailNickname,JobTitle,Department,ManagerUpn,UsageLocation,LicenseSkuId,Groups
+Test Joiner One,testjoiner1@yourtenant.onmicrosoft.com,testjoiner1,Support Analyst,IT Support,manager@yourtenant.onmicrosoft.com,US,,

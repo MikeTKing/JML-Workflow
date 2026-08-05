@@ -1,0 +1,2 @@
+UserPrincipalName,NewJobTitle,NewDepartment,NewManagerUpn,RemoveGroups,AddGroups
+testjoiner1@yourtenant.onmicrosoft.com,Senior Support Analyst,IT Support,manager@yourtenant.onmicrosoft.com,,
